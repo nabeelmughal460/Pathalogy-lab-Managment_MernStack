@@ -1,0 +1,13 @@
+.Footer{
+    display: flex;
+    justify-content: space-around;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.firstcolFooter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
