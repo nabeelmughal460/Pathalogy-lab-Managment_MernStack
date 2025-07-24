@@ -2,14 +2,14 @@
 import React from "react";
 import "./Modals.css";
 
-const Modals = ({ OpenCreate, setOpenCreate }) => {
+const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from navbarv item from status  as a props*/
 //   if (!OpenCreate) return null;
 
   return (
     <div className="modal">
       <div className="ModalCard">
         <div className="Modal-TitleBox">
-          <div className="Modal-Title">Create New</div>
+          <div className="Modal-Title">{item ? "Update Patient" : "Create New"}</div>
           <div
             className="X-Button-Crox"
             onClick={() => setOpenCreate((prev) => !prev)}
