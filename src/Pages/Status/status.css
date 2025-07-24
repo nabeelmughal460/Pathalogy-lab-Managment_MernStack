@@ -1,0 +1,74 @@
+.Status-Page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.statusPageWorksDiv {
+  width: 70%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.status-bar {
+  display: flex;
+  width: 70%;
+}
+.status-Title {
+  width: 50%;
+  border: 1px solid rgb(12, 187, 187);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+
+.activeBarStatus {
+  background-color: rgb(12, 187, 187);
+  color: white;
+}
+.status-List {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+.status-row-List {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+    border: 1px solid rgb(12, 187, 187);
+margin-bottom: 20px;
+}
+.status-Name {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.status-Docter-detail {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.status-btns {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Icons {
+  width: 40px;
+  height: 40px;
+  background-color: greenyellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+}

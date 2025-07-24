@@ -37,9 +37,9 @@ useEffect(() => {
   
   return (
     <div className="navbar">
-      <div className="leftside">
+      <Link to={'/'} className="leftside">
         <img src={logo} alt="logo" className="Img-logo" />
-      </div>
+      </Link>
       <div className="rightside">
         <div
           className="Links-rightside"
