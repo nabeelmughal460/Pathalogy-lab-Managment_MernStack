@@ -1,11 +1,40 @@
 // import React ,{useState} 'react'
 import "./Navbar.css";
 import logo from "../../assets/logo.jpg";
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 import Modals from "../Modals/Modals";
 
 const Navbar = () => {
+  const ref =useRef();
   const [OpenCreate, setOpenCreate] = useState(false);
+  const [ClickAddTest, setClickAddTest] = useState(false);
+//   useEffect(() => {
+//       const Check_If_Clicked_Outside=(e)=>{
+//         if(ClickAddTest && ref.current && !ref.current.contains(e.target))
+//         {
+// setClickAddTest(false)
+//         }
+//       }
+//       document.addEventListener("mousedown",Check_If_Clicked_Outside);
+//       return()=>{
+//         document.removeEventListener("mousedown",Check_If_Clicked_Outside);
+//       }
+//     }, [ClickAddTest])
+useEffect(() => {
+  const Check_If_Clicked_Outside = (e) => {
+    if (ClickAddTest && ref.current && !ref.current.contains(e.target)) {
+      setClickAddTest(false);
+    }
+  };
+
+  document.addEventListener("mousedown", Check_If_Clicked_Outside);
+
+  return () => {
+    document.removeEventListener("mousedown", Check_If_Clicked_Outside);
+  };
+}, [ClickAddTest]);
+
+  
   return (
     <div className="navbar">
       <div className="leftside">
@@ -23,10 +52,11 @@ const Navbar = () => {
         <div className="Links-rightside">Report</div>
         <div className="Links-rightside">
 
-          <div className="NavlinkAddTest">
+          <div className="NavlinkAddTest" onClick={()=>{setClickAddTest(true)}}>
             Add Test
           </div>
-           <div className="Addtest-Modal">
+        {
+          ClickAddTest &&    <div className="Addtest-Modal" ref={ref}>
               
               <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
@@ -70,8 +100,17 @@ const Navbar = () => {
                 </div>
                 <input type="text" className="InputAddtest-Inputfeild"/>
                 </div>
-              
+                <div className="InputAddtestModals">
+                <div className="InputAddtestLabel">
+                Abnormal Range
+                </div>
+                <input type="text" className="InputAddtest-Inputfeild"/>
+                </div>
+              <div className="Add-modal-create-btn">
+                Create
+              </div>
             </div>
+        }
         </div>
       </div>
 

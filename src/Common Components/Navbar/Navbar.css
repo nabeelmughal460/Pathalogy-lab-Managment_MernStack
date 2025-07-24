@@ -80,6 +80,20 @@
 .InputAddtestModals{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 .InputAddtestLabel{}
 .InputAddtest-Inputfeild{}
+
+.Add-modal-create-btn{
+    width: 80px;
+    border: 1px solid;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Add-modal-create-btn:hover{
+    background-color: #3ac6bc;
+}
