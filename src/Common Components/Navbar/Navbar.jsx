@@ -3,7 +3,7 @@ import "./Navbar.css";
 import logo from "../../assets/logo.jpg";
 import { useState,useEffect,useRef } from "react";
 import Modals from "../Modals/Modals";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const ref =useRef();
   const [OpenCreate, setOpenCreate] = useState(false);
@@ -49,7 +49,7 @@ useEffect(() => {
         >
           Create New
         </div>
-        <div className="Links-rightside">Report</div>
+        <Link className="Links-rightside" to={"/status"}>Report</Link>
         <div className="Links-rightside">
 
           <div className="NavlinkAddTest" onClick={()=>{setClickAddTest(true)}}>

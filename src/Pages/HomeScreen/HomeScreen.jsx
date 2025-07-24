@@ -3,6 +3,7 @@ import "./Homescreen.css";
 import labscientist from "../../assets/labscientist.JPEG";
 import hemolobinimage from "../../assets/hemoglobin.jpg";
 import data from "./Data.json";
+import Footer from "../../Common Components/Footer/Footer";
 const HomeScreen = () => {
   // console.log(data);
   const [listoflist, setlistoflist] = useState([]);
@@ -135,7 +136,9 @@ const HomeScreen = () => {
             <button className="ContactUsBtn">Send</button>
         </div>
       </div>
+     <Footer/>
     </div>
+
   );
 };
 
