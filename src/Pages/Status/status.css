@@ -71,4 +71,28 @@ margin-bottom: 20px;
   align-items: center;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.Icons::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #00ff00, #008000); /* gradient colors */
+  transition: left 0.4s ease;
+  z-index: 0;
+}
+
+.Icons:hover::before {
+  left: 0;
+}
+
+.Icons > * {
+  position: relative;
+  z-index: 1;
 }

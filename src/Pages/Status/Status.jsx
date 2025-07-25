@@ -95,10 +95,10 @@ const Status = () => {
                 <div className="Icons" onClick={()=>{UpdateIconClick(item)}}> <UpdateIcon />  </div> :null
                     }
                  
-                { activebar=== "Pending" ? <div className="Icons" style={{ backgroundColor: "red" }}> <DeleteIcon /> </div> :null}                             
-                    <Link  to={`/report /${item.id}`}
+                { activebar=== "Pending" ? <div className="Icons" style={{ backgroundColor: "#f44336", color:"white" }}> <DeleteIcon /> </div> :null}                             
+                    <Link  to={`/report/${item.id}`}
                       className="Icons"
-                      style={{ backgroundColor: "yellow" }}
+                      style={{ backgroundColor: "#f44336", color:"white" }}
                     >
                       <ArticleIcon />
                     </Link>

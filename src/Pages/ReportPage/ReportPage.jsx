@@ -1,7 +1,12 @@
 import React,{useState} from "react";
 import "./ReportPage.css";
+import { Link,useParams} from "react-router-dom";
+
 
 const Report = () => {
+  const {id}  =useParams() // const yh name woi rehna chaiya jo hum na dala hay App.js ka route ma like "id" ager yaha name hota id ki jaga to hum waha pa name likhty
+ console.log(id,"ello thus id");
+ 
   const [Inputfeild, setInputfeild] = useState([
     { "id":0,"name": "", "range": "", "unit": "", "result": "" },
   ]);
@@ -35,6 +40,11 @@ const Report = () => {
         setInputfeild(Inputfeild.slice(0,-1))
     }
     // const UpdatedRow=Inputfeild.filter(row=>row.id!=Inputfeild.length-1)
+  }
+
+
+  const handleReportFunction=()=>{
+
   }
   return (
     <div className="report-page">
@@ -83,7 +93,7 @@ const Report = () => {
                     Inputfeild.length>1 ? <div className="add-btn-row" onClick={RemoveInputRows}>Remove</div>  :null
 
                 }
-            <div className="add-btn-row">Report</div>
+            <Link className="add-btn-row" to={`/prescription/:${id}`} onClick={handleReportFunction}>Report</Link>
           </div>
         </div>
       </div>

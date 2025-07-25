@@ -33,8 +33,8 @@ const HomeScreen = () => {
             <img src={labscientist} alt="labscientist" className="lablogo" />
           </div>
           <div className="intropart">
-            <div className="title">EnterPrises Limited</div>
-            <div className="titlemajor">Pathology managment System</div>
+            <div className="title">MediTrack Technologies</div>
+            <div className="titlemajor">MediTrack Lab managment System</div>
 
             <div className="Description1">
               <p>
