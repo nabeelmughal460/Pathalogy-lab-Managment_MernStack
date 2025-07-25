@@ -4,6 +4,7 @@ import Navbar from './Common Components/Navbar/Navbar'
 import HomeScreen from './Pages/HomeScreen/HomeScreen'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Status from './Pages/Status/Status'
+import ReportPage from './Pages/ReportPage/ReportPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path='/status' element={<Status/>} />
+          <Route path='report/:id' element={<ReportPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

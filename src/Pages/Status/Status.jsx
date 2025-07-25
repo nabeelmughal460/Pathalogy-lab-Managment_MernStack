@@ -4,19 +4,20 @@ import UpdateIcon from "@mui/icons-material/Update";
 import ArticleIcon from "@mui/icons-material/Article";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Modals from '../../Common Components/Modals/Modals'
+import { Link } from "react-router-dom";
 const Status = () => {
   const PendingData = [
     {
       id: "1",
-      name: "Danish",
-      drName: "Sanjeev Kr Singh",
-      presDate: "08-04-2024",
+      name: "Ayesha",
+      drName: "hamnah khan",
+      presDate: "08-07-2025",
     },
     {
       id: "2",
-      name: "Shubham Kumar",
-      drName: "Rajeev Singh",
-      presDate: "03-04-2024",
+      name: "Rabail Adnam",
+      drName: "Dr Shafique Ahmed",
+      presDate: "03-07-2025",
     },
   ];
 
@@ -45,6 +46,8 @@ const Status = () => {
       setdata(completedData);
     }
   }, [activebar]);
+  
+
   const UpdateIconClick=(item)=>{
 
     setClickUpdate(true)
@@ -87,18 +90,18 @@ const Status = () => {
                     <div className="status-docter-name">{item.presDate}</div>
                   </div>
                   <div className="status-btns">
-                    <div className="Icons" onClick={()=>{UpdateIconClick(item)}}>
-                      <UpdateIcon />
-                    </div>
-                    <div className="Icons" style={{ backgroundColor: "red" }}>
-                      <DeleteIcon />
-                    </div>
-                    <div
+
+                    {activebar==="Pending" ?
+                <div className="Icons" onClick={()=>{UpdateIconClick(item)}}> <UpdateIcon />  </div> :null
+                    }
+                 
+                { activebar=== "Pending" ? <div className="Icons" style={{ backgroundColor: "red" }}> <DeleteIcon /> </div> :null}                             
+                    <Link  to={`/report /${item.id}`}
                       className="Icons"
                       style={{ backgroundColor: "yellow" }}
                     >
                       <ArticleIcon />
-                    </div>
+                    </Link>
                   </div>
                 </div>
               );
