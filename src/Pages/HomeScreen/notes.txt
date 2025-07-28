@@ -1,2 +1,0 @@
-const [listoflist, setlistoflist] = useState([])
-    const [activeIndexNAmeList, setactiveIndexNAmeList] = useState(0) // initial value is 0 hay iski qk  jab bi component rendar hoga to uska active index 0 hoga wo 0 index ki array ko uthaye ga
