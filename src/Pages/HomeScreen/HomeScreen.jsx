@@ -4,11 +4,14 @@ import labscientist from "../../assets/labscientist.JPEG";
 import hemolobinimage from "../../assets/hemoglobin.jpg";
 import data from "./Data.json";
 import Footer from "../../Common Components/Footer/Footer";
+import Modals from "../../Common Components/Modals/Modals";
 const HomeScreen = () => {
   // console.log(data);
   const [listoflist, setlistoflist] = useState([]);
   const [activeIndexNAmeList, setactiveIndexNAmeList] = useState(0);
   const [selecteDetail_Test, setselecteDetail_Test] = useState(null);
+  const [ClickAddTest, setClickAddTest] = useState(false);
+
   console.log(listoflist);
 
   useEffect(() => {
@@ -25,6 +28,10 @@ const HomeScreen = () => {
 
   //   console.log(activeIndexNAmeList);
 
+  const handleClosePopUp=(val)=>{
+    setClickAddTest(val)
+
+  }
   return (
     <div className="homescreen">
       <div className="introduction-HomeScreen">
@@ -62,8 +69,8 @@ const HomeScreen = () => {
               </p>
             </div>
             <div className="buttonsDIV">
-              <button className="buttonbtn">Create New</button>
-              <button className="buttonbtn">Contact</button>
+              <button className="buttonbtn" onClick={()=>{setClickAddTest(true)}}>Create New</button>
+              <button className="buttonbtn"><a href="#contactus" style={{textDecoration:"none", color:'black'}}>Contact </a></button>
             </div>
           </div>
         </div>
@@ -137,6 +144,10 @@ const HomeScreen = () => {
         </div>
       </div>
      <Footer/>
+{
+  ClickAddTest &&      <Modals setOpenCreate={setClickAddTest}/>
+
+}
     </div>
 
   );

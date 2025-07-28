@@ -1,9 +1,16 @@
 // Modals.jsx
-import React from "react";
+import React,{useState} from "react";
 import "./Modals.css";
 
 const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from navbarv item from status  as a props*/
 //   if (!OpenCreate) return null;
+ const [Input, setInput] = useState({"name":"","age":"","address":"","mobileNumber":"","examineby":"","examinedate":"","selectedtest":"","reporteddate":""})
+ const HandleInput=(event)=>{
+  // console.log(Input);
+  setInput({...Input,[event.target.name]:event.target.value})
+
+ }
+console.log(Input);
 
   return (
     <div className="modal">
@@ -12,28 +19,44 @@ const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from 
           <div className="Modal-Title">{item ? "Update Patient" : "Create New"}</div>
           <div
             className="X-Button-Crox"
-            onClick={() => setOpenCreate((prev) => !prev)}
+            onClick={() => 
+              // setOpenCreate((prev) => !prev)
+              setOpenCreate(false)
+            }
+
           >
             X
           </div>
+            {/* <div
+  className="X-Button-Crox"
+  onClick={() => {
+    console.log("Close modal clicked");
+    setOpenCreate((prev) => !prev);
+  }}
+>
+  X
+            </div> */}
+
         </div>
         <div className="ModalBody">
           <div className="Input-Row-Modal">
             <div className="input-Box">
-              <div className="Input-Label">Name</div>
+              <div className="Input-Label" >Name</div>
               <input
                 className="Input-field"
                 type="text"
-                name="Name"
+                name="name"
+                value={Input.name} onChange={(e)=>{HandleInput(e)}}
                 placeholder="Enter the Name of the Pateint"
               />
             </div>
             <div className="input-Box">
-              <div className="Input-Label">Age</div>
+              <div className="Input-Label" >Age</div>
               <input
                 className="Input-field"
                 type="text"
-                name="Name"
+                name="age"
+                value={Input.age} onChange={(e)=>{HandleInput(e)}}
                 placeholder="Enter thd age"
               />
             </div>
@@ -45,16 +68,18 @@ const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from 
               <input
                 className="Input-field"
                 type="text"
-                name="Address"
+                name="address"
+                value={Input.address} onChange={(e)=>{HandleInput(e)}}
                 placeholder="Enter the Address of the Pateint"
               />
             </div>
             <div className="input-Box">
-              <div className="Input-Label">Mpbile Number</div>
+              <div className="Input-Label" >Mobile Number</div>
               <input
                 className="Input-field"
                 type="text"
                 name="phone"
+                value={Input.mobileNumber} onChange={(e)=>{HandleInput(e)}}
                 placeholder="Enter the Mobile Number"
               />
             </div>
@@ -62,20 +87,21 @@ const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from 
 
           <div className="Input-Row-Modal">
             <div className="input-Box">
-              <div className="Input-Label">Examine by</div>
+              <div className="Input-Label" >Examine by</div>
               <input
                 className="Input-field"
                 type="text"
-                name="Name"
+                name="examineby"  value={Input.examineby} onChange={(e)=>{HandleInput(e)}}
                 placeholder="Enter the Name of the Docter"
+                
               />
             </div>
             <div className="input-Box">
-              <div className="Input-Label">Age</div>
+              <div className="Input-Label" >Examine Date</div>
               <input
                 className="Input-field"
                 type="date"
-                name="examine date"
+                name="examinedate"value={Input.examinedate} onChange={(e)=>{HandleInput(e)}}                
                 placeholder="Select the Date of Examine"
               />
             </div>
@@ -84,11 +110,11 @@ const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from 
           <div className="Input-Row-Modal">
             <div className="input-Box">
               <div className="Input-Label">Selected test</div>
-              <select className="Input-field">
+              <select className="Input-field" name="selectedtest" onChange={(e)=>{HandleInput(e)}}>
                 <option>Test1</option>
-                <option>Test1</option>
-                <option>Test1</option>
-                <option>Test1</option>
+                <option>Test2</option>
+                <option>Test3</option>
+                <option>Test4</option>
               </select>
             </div>
             <div className="input-Box">
@@ -96,7 +122,7 @@ const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from 
               <input
                 className="Input-field"
                 type="date"
-                name="Name"
+                 name="reporteddate" value={Input.reporteddate} onChange={(e)=>{HandleInput(e)}}
                 placeholder="Reported Date"
               />
             </div>

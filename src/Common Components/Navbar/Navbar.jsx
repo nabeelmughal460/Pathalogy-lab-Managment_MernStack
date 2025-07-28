@@ -8,6 +8,13 @@ const Navbar = () => {
   const ref =useRef();
   const [OpenCreate, setOpenCreate] = useState(false);
   const [ClickAddTest, setClickAddTest] = useState(false);
+  const [Input, setInput] = useState({"name":"","description":"","price":"","imgLink":"","fasting":"","normalrange":"","abnormalrange":""})
+   const HandleInput=(event)=>{
+    // console.log(Input);
+    setInput({...Input,[event.target.name]:event.target.value})
+  
+   }
+  console.log(Input);
 //   useEffect(() => {
 //       const Check_If_Clicked_Outside=(e)=>{
 //         if(ClickAddTest && ref.current && !ref.current.contains(e.target))
@@ -62,49 +69,56 @@ useEffect(() => {
                 <div className="InputAddtestLabel">
                 Name
                 </div>
-                <input type="text" className="InputAddtest-Inputfeild"/>
+                <input type="text" className="InputAddtest-Inputfeild" name="name"
+                value={Input.name} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
-                <div className="InputAddtestModals">
+                {/* <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
                 Name
                 </div>
                 <input type="text" className="InputAddtest-Inputfeild"/>
-                </div>
+                </div> */}
                 <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
                 Description
                 </div>
-                <input type="text" className="InputAddtest-Inputfeild"/>
+                <input type="text" className="InputAddtest-Inputfeild" name="description"
+                value={Input.description} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
                 <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
                 Price
                 </div>
-                <input type="text" className="InputAddtest-Inputfeild"/>
+                <input type="text" className="InputAddtest-Inputfeild" name="price"
+                value={Input.price} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
                 <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
                 Image Link
                 </div>
-                <input type="text" className="InputAddtest-Inputfeild"/>
+                <input type="text" className="InputAddtest-Inputfeild" name="imgLink"
+                value={Input.imgLink} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
                 <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
                Fasting
                 </div>
-                <input type="text" className="InputAddtest-Inputfeild"/>
+                <input type="text" className="InputAddtest-Inputfeild" name="fasting"
+                value={Input.fasting} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
                 <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
                 Normal Range
                 </div>
-                <input type="text" className="InputAddtest-Inputfeild"/>
+                <input type="text" className="InputAddtest-Inputfeild" name="normalrange"
+                value={Input.normalrange} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
                 <div className="InputAddtestModals">
                 <div className="InputAddtestLabel">
                 Abnormal Range
                 </div>
-                <input type="text" className="InputAddtest-Inputfeild"/>
+                <input type="text" className="InputAddtest-Inputfeild" name="abnormalrange"
+                value={Input.abnormalrange} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
               <div className="Add-modal-create-btn">
                 Create
