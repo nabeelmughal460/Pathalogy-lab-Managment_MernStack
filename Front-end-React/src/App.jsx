@@ -9,13 +9,13 @@ import Prescription from './Pages/HomeScreen/Prescription/Prescription'
 import axios from 'axios'
 function App() {
   const [count, setCount] = useState(0)
-  axios.get('http://localhost:8000/test/get').then(response=>{
-    console.log(response);
+  // axios.get('http://localhost:8000/test/get').then(response=>{
+  //   console.log(response);
     
-  }).catch(err=>{
-    console.log(err);
+  // }).catch(err=>{
+  //   console.log(err);
     
-  })
+  // })
 
   return (
     <div className='App'>

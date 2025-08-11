@@ -4,6 +4,7 @@ import logo from "../../assets/logo.jpg";
 import { useState,useEffect,useRef } from "react";
 import Modals from "../Modals/Modals";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Navbar = () => {
   const ref =useRef();
   const [OpenCreate, setOpenCreate] = useState(false);
@@ -14,7 +15,7 @@ const Navbar = () => {
     setInput({...Input,[event.target.name]:event.target.value})
   
    }
-  console.log(Input);
+  // console.log(Input);
 //   useEffect(() => {
 //       const Check_If_Clicked_Outside=(e)=>{
 //         if(ClickAddTest && ref.current && !ref.current.contains(e.target))
@@ -41,6 +42,14 @@ useEffect(() => {
   };
 }, [ClickAddTest]);
 
+const OnClickCreate =async()=>{
+//  console.log(Input);
+await axios.post("http://localhost:8000/test/post",Input).then(response=>{console.log(response);
+}).catch(err=>{
+  console.log(err);
+})
+  
+}
   
   return (
     <div className="navbar">
@@ -120,7 +129,7 @@ useEffect(() => {
                 <input type="text" className="InputAddtest-Inputfeild" name="abnormalrange"
                 value={Input.abnormalrange} onChange={(e)=>{HandleInput(e)}}/>
                 </div>
-              <div className="Add-modal-create-btn">
+              <div className="Add-modal-create-btn" onClick={OnClickCreate}>
                 Create
               </div>
             </div>

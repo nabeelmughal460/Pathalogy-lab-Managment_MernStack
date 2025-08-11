@@ -5,25 +5,40 @@ import hemolobinimage from "../../assets/hemoglobin.jpg";
 import data from "./Data.json";
 import Footer from "../../Common Components/Footer/Footer";
 import Modals from "../../Common Components/Modals/Modals";
+import axios from "axios";
 const HomeScreen = () => {
   // console.log(data);
-  const [listoflist, setlistoflist] = useState([]);
+  const [ListofTest, setListofTest] = useState([]);
   const [activeIndexNAmeList, setactiveIndexNAmeList] = useState(0);
-  const [selecteDetail_Test, setselecteDetail_Test] = useState(null);
+  const [selecteDetailedTest, setselecteDetailedTest] = useState(null);
   const [ClickAddTest, setClickAddTest] = useState(false);
 
-  console.log(listoflist);
+  // console.log(ListofTest); // array list hay
 
   useEffect(() => {
     // console.log(data.data);
-    setselecteDetail_Test(data.data[0]);
-    setlistoflist(data.data);
+    fetchDataonLoading()
+    console.log(selecteDetailedTest,'sasasasa');
+    
   }, []);
-  console.log(selecteDetail_Test);
+  // console.log(selecteDetailedTest);
+  const fetchDataonLoading=async()=>{
+    await axios.get('http://localhost:8000/test/get').then(response=>{
+      const data =response.data.data;
+      setListofTest(data)
+          setselecteDetailedTest(data[0]);
+
+      console.log(response);
+      
+  }).catch(err=>{
+    console.log(err);
+    
+  })
+  }
 
   const handleclick_activeindex = (index) => {
     setactiveIndexNAmeList(index);
-    setselecteDetail_Test(data.data[index]);
+    setselecteDetailedTest(ListofTest[index]);
   };
 
   //   console.log(activeIndexNAmeList);
@@ -80,9 +95,9 @@ const HomeScreen = () => {
 
       <div className="testscreens">
         <div className="left-Part-Test">
-          <div className="totalTest">4 Test Available</div>
+          <div className="totalTest">{ListofTest?.length}Test Available</div>
           <div className="Test-Name-List">
-            {listoflist?.map((item, index) => {
+            {ListofTest?.map((item, index) => {
               return (
                 <div
                   className={`AllTestname ${
@@ -98,26 +113,34 @@ const HomeScreen = () => {
         </div>
 
         <div className="right-Part-Test">
-          <div className="TestHeader">{selecteDetail_Test?.name}</div>
+          <div className="TestHeader">{selecteDetailedTest?.name}</div>
           <div className="bottompart-TestHeader">
             <div className="test-header-Details">
-              {selecteDetail_Test?.description}
+              {selecteDetailedTest?.description}
             </div>
 
             <div className="test-bottom-section">
               <div className="test-requirments">
-                {selecteDetail_Test?.requirements.map((item, index) => {
-                  return (
-                    <div className="detailblock">
-                      {item.key} :{" "}
-                      <span className="spancolorchange">{item.value}</span>
+                  <div className="detailblock">
+                      {"Fasting"} :
+                      <span className="spancolorchange">{selecteDetailedTest?.fasting}</span>
                     </div>
-                  );
-                })}
+                    <div className="detailblock">
+                      {"Normal Range"} :
+                      <span className="spancolorchange">{selecteDetailedTest?.normalrange}</span>
+                    </div>
+                    <div className="detailblock">
+                      {"Abnormal Range"} :
+                      <span className="spancolorchange">{selecteDetailedTest?.abnormalrange}</span>
+                    </div>
+                    <div className="detailblock">
+                      {"Price"} :
+                      <span className="spancolorchange">{selecteDetailedTest?.price}</span>
+                    </div>
               </div>
               <div className="test-images">
                 <img
-                  src={selecteDetail_Test?.imgLink}
+                  src={selecteDetailedTest?.imgLink}
                   alt="image"
                   className="Test_IMG"
                 />
