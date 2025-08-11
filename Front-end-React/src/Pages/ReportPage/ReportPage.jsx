@@ -5,7 +5,7 @@ import { Link,useParams} from "react-router-dom";
 
 const Report = () => {
   const {id}  =useParams() // const yh name woi rehna chaiya jo hum na dala hay App.js ka route ma like "id" ager yaha name hota id ki jaga to hum waha pa name likhty
- console.log(id,"ello thus id");
+ console.log(id,"hello this id");
  
   const [Inputfeild, setInputfeild] = useState([
     { "id":0,"name": "", "range": "", "unit": "", "result": "" },

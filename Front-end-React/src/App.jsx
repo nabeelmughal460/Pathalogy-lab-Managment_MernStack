@@ -6,9 +6,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Status from './Pages/Status/Status'
 import ReportPage from './Pages/ReportPage/ReportPage'
 import Prescription from './Pages/HomeScreen/Prescription/Prescription'
-
+import axios from 'axios'
 function App() {
   const [count, setCount] = useState(0)
+  axios.get('http://localhost:8000/test/get').then(response=>{
+    console.log(response);
+    
+  }).catch(err=>{
+    console.log(err);
+    
+  })
 
   return (
     <div className='App'>
