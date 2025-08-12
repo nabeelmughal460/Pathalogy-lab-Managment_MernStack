@@ -1,16 +1,43 @@
 // Modals.jsx
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "./Modals.css";
+import axios from "axios";
 
 const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from navbarv item from status  as a props*/
-//   if (!OpenCreate) return null;
- const [Input, setInput] = useState({"name":"","age":"","address":"","mobileNumber":"","examineby":"","examinedate":"","selectedtest":"","reporteddate":""})
+const [ListofTest, setListofTest] = useState([])
+  //   if (!OpenCreate) return null;
+ const [Input, setInput] = useState({"name":"","age":"","address":"","mobileNumber":"","examineby":"","examinedate":"","test":"","reporteddate":""})
+ useEffect(()=>{
+  HandleSelectOption()
+ },[])
  const HandleInput=(event)=>{
   // console.log(Input);
   setInput({...Input,[event.target.name]:event.target.value})
 
  }
 console.log(Input);
+ const HandleCreateNew =async ()=>{
+  // console.log(Input);
+  await axios.post("http://localhost:8000/patient/post",Input).then(response=>{
+    console.log(response);
+    window.location.reload()
+  }).catch(err=>{
+    console.log(err);
+    
+  })
+}
+const HandleSelectOption=async()=>{
+  await axios.get('http://localhost:8000/test/get').then(response=>{
+      const data =response.data.data;
+      setListofTest(data)
+      // console.log(response);
+      console.log(data);
+      
+  }).catch(err=>{
+    console.log(err);
+    
+  })}
+
 
   return (
     <div className="modal">
@@ -77,8 +104,8 @@ console.log(Input);
               <div className="Input-Label" >Mobile Number</div>
               <input
                 className="Input-field"
-                type="text"
-                name="phone"
+                type="number"
+                name="mobileNumber"//change today 12/8/25
                 value={Input.mobileNumber} onChange={(e)=>{HandleInput(e)}}
                 placeholder="Enter the Mobile Number"
               />
@@ -110,11 +137,17 @@ console.log(Input);
           <div className="Input-Row-Modal">
             <div className="input-Box">
               <div className="Input-Label">Selected test</div>
-              <select className="Input-field" name="selectedtest" onChange={(e)=>{HandleInput(e)}}>
-                <option>Test1</option>
-                <option>Test2</option>
+              <select className="Input-field" name="test" onChange={(e)=>{HandleInput(e)}}>
+                {
+                  ListofTest?.map((item,index)=>{
+                    return(
+                    <option value={`${item._id}`}>{item.name}</option>
+                    )
+                  })
+                }
+                {/* <option>Test2</option>
                 <option>Test3</option>
-                <option>Test4</option>
+                <option>Test4</option> */}
               </select>
             </div>
             <div className="input-Box">
@@ -129,7 +162,7 @@ console.log(Input);
           </div>
 
           <div className="modal-btn">
-            <button className="modal-Btn-style">Submit</button>
+            <button className="modal-Btn-style"onClick={HandleCreateNew}>Submit</button>
             <button className="modal-Btn-style">Clear</button>
           </div>
         </div>

@@ -44,7 +44,10 @@ useEffect(() => {
 
 const OnClickCreate =async()=>{
 //  console.log(Input);
-await axios.post("http://localhost:8000/test/post",Input).then(response=>{console.log(response);
+await axios.post("http://localhost:8000/test/post",Input)
+.then(response=>{
+  console.log(response);
+  window.location.reload()
 }).catch(err=>{
   console.log(err);
 })
