@@ -1,10 +1,35 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Prescription.css";
 import logo from "../../../assets/logo.jpg";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import axios from "axios";
+import { useParams, useSearchParams } from "react-router-dom";
+
 
 const Prescription = () => {
+  const {id}= useParams();
+  console.log(id);
+  
+  const [PateintData, setPateintData] = useState(null)
+  useEffect(() => {
+    HandleOnPageLoading()
+  
+  }, [])
+  const HandleOnPageLoading=async()=>{
+    await axios.get(`http://localhost:8000/patient/get/${id}`).then(response=>{
+      const data=response.data.data;
+      setPateintData(data)
+      console.log(response);
+      
+    }).catch(err=>{
+      console.log(err);
+      
+    })
+
+  }
+    console.log(PateintData,"pateint Data");
+      
     const DownoadPDF_Function=()=>{
         const input=document.getElementById("pdfDownload")
         html2canvas(input).then((canvas)=>{
@@ -25,7 +50,7 @@ const Prescription = () => {
        const ImgHeight = (canvas.height * ImgWidth) / canvas.width;
 
        PDF.addImage(ImgData, 'PNG' ,0,0,ImgWidth,ImgHeight)
-       PDF.save(`name.pdf`)
+       PDF.save(`${PateintData.name}.pdf`)
        // const PDFWidth=210;
        // const PDFHeight=290;
        // PDF.addImage(ImgData, 'PNG', 15, 40, ImgWidth,
@@ -83,32 +108,32 @@ const Prescription = () => {
               {/* info detail pa aye ga patient-info-detail */}
               {/* ae pa aye ga  patient-info-detail-age */}
               <div className="patient-name-attr">Name :</div>
-              <div className="patient-name-value">{"Patient Name"}</div>
+              <div className="patient-name-value">{PateintData?.name}</div>
             </div>
             {/* patient-info-detail-age Age ki jaga pa */}
             <div className="patient-info-detail-age">
               <div className="patient-name-attr">Age :</div>
-              <div className="patient-name-value">{"Patient Age"}</div>
+              <div className="patient-name-value">{PateintData?.age}</div>
             </div>
 
             <div className="patient-info-detail">
               <div className="patient-name-attr">Address :</div>
-              <div className="patient-name-value">{"Patient Address"}</div>
+              <div className="patient-name-value">{PateintData?.address}</div>
             </div>
           </div>
 
           <div className="patient-info-row">
             <div className="patient-info-detail">
               <div className="patient-name-attr">Mobile Number :</div>
-              <div className="patient-name-value">{"Patient Mobile No"}</div>
+              <div className="patient-name-value">{PateintData?.mobileNumber}</div>
             </div>
             <div className="patient-info-detail-age">
-              <div className="patient-name-attr">Address :</div>
-              <div className="patient-name-value">{"Patient Address"}</div>
+              <div className="patient-name-attr">Examined by :</div>
+              <div className="patient-name-value">{PateintData?.examineby}</div>
             </div>
             <div className="patient-info-detail">
               <div className="patient-name-attr">Examined Date :</div>
-              <div className="patient-name-value">{"Patient Examined Date"}</div>
+              <div className="patient-name-value">{PateintData?.examinedate}</div>
             </div>
           </div>
         </div>
@@ -125,12 +150,20 @@ const Prescription = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="finalPresTableRow">
-                  <td>{"test 1"}</td>
-                  <td>{"89-100"}</td>
-                  <td>{"ML"}</td>
-                  <td>{"95"}</td>
+                {
+                PateintData?.result?.map((item,id)=>{
+                  return(
+                   <tr className="finalPresTableRow" key={id}>
+                  <td>{item.name}</td>
+                  <td>{item.range}</td>
+                  <td>{item.unit}</td>
+                  <td>{item.result}</td>
                 </tr>
+                  )
+                })
+
+                }
+               
               </tbody>
             </table>
             {/* </div> */}
@@ -138,12 +171,12 @@ const Prescription = () => {
             <div className="footer-prescription">
               <div className="examinedBy">
                 <div className="signature">
-                  <div>Examined By</div>
-                  <div>Dr Bashir Ahmad</div>
+                  <div>Tested By</div>
+                  <div>{PateintData?.examineby}</div>
                 </div>
                 <div className="signature">
                   <div>Report Date</div>
-                  <div>{"Report Date"}</div>
+                  <div>{PateintData?.reporteddate}</div>
                 </div>
               </div>
             </div>

@@ -1,15 +1,37 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "./ReportPage.css";
 import { Link,useParams} from "react-router-dom";
-
+import axios from "axios";
 
 const Report = () => {
   const {id}  =useParams() // const yh name woi rehna chaiya jo hum na dala hay App.js ka route ma like "id" ager yaha name hota id ki jaga to hum waha pa name likhty
- console.log(id,"hello this id");
- 
+
+  const [PatientDetail, setPatientDetail] = useState(null)
+  const [TestDataDetails, setTestDataDetails] = useState(null)
   const [Inputfeild, setInputfeild] = useState([
     { "id":0,"name": "", "range": "", "unit": "", "result": "" },
   ]);
+    console.log(id,"hello this id");
+  useEffect(() => {
+  FetchedDataOnLoading();
+ }, [])
+ console.log(PatientDetail);
+ console.log(TestDataDetails);
+ 
+ 
+  const FetchedDataOnLoading=async()=>{
+ await axios.get(`http://localhost:8000/patient/${id}/TestDetails`).then(response=>{
+  console.log(response);
+  const patData=response.data.patient;
+  const TestData=response.data.test;
+  setPatientDetail(patData);
+  setTestDataDetails(TestData);
+ }).catch(err=>{
+  console.log(err);
+  
+ })
+  }
+ 
 
   const OnChangeInput=(event,index)=>{
     const UpdatedRow= Inputfeild.map(row=>{
@@ -43,20 +65,32 @@ const Report = () => {
   }
 
 
-  const handleReportFunction=()=>{
+  const handleReportFunction=async()=>{
+       await axios.put(`http://localhost:8000/patient/${PatientDetail._id}`,
+        {
+          ...PatientDetail,result:Inputfeild,status:"Completed"
+        }
+       ).then(response=>{
+        console.log(response);
+        window.location.reload()
+      }).catch(err=>{
+        alert("Something Went Wrong")
+        console.log(err);
+        
+      })
 
   }
   return (
     <div className="report-page">
       <div className="reportDiv">
         <div className="report-infos">
-          <div className="report-info">Name : Talha</div>
-          <div className="report-info">Examined By : Mansoor Ahmed</div>
+          <div className="report-info">Name : {PatientDetail?.name}</div>
+          <div className="report-info">Examined By : {PatientDetail?.examineby}</div>
         </div>
 
         <div className="report-inputBlock">
           <div className="report-tests">
-            <div className="nameOfTest">Urine Glucose Test</div>
+            <div className="nameOfTest">{TestDataDetails?.name}</div>
           </div>
 
           <div className="inputRows">

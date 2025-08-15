@@ -6,7 +6,7 @@ import axios from "axios";
 const Modals = ({ OpenCreate, setOpenCreate ,item }) => { /*setOpenCreate  from navbarv item from status  as a props*/
 const [ListofTest, setListofTest] = useState([])
   //   if (!OpenCreate) return null;
- const [Input, setInput] = useState({"name":"","age":"","address":"","mobileNumber":"","examineby":"","examinedate":"","test":"","reporteddate":""})
+ const [Input, setInput] = useState({"name":item?item.name:"","age":item?item.age:"","address":item?item.address:"","mobileNumber":item?item.mobileNumber:"","examineby":item?item.examineby:"","examinedate":item?item.examinedate:"","test":item?item.test:"","reporteddate":item?item.reporteddate:""})
  useEffect(()=>{
   HandleSelectOption()
  },[])
@@ -18,20 +18,43 @@ const [ListofTest, setListofTest] = useState([])
 console.log(Input);
  const HandleCreateNew =async ()=>{
   // console.log(Input);
-  await axios.post("http://localhost:8000/patient/post",Input).then(response=>{
+ if(!item){
+   await axios.post("http://localhost:8000/patient/post",Input).then(response=>{
     console.log(response);
     window.location.reload()
   }).catch(err=>{
+    alert("please fill every detail")
     console.log(err);
     
   })
+ }
+ else{
+   await axios.put(`http://localhost:8000/patient/${item._id}`,Input).then(response=>{ // put method ma hum body ma kuc bejty hain like Input hum na bheja hay as a value body ma
+    //👉 "In the PUT method, we send data in the request body, such as the input value."
+    console.log(response);
+    window.location.reload()
+  }).catch(err=>{
+    alert("Something Went Wrong")
+    console.log(err);
+    
+  })
+ }
+
 }
 const HandleSelectOption=async()=>{
   await axios.get('http://localhost:8000/test/get').then(response=>{
       const data =response.data.data;
       setListofTest(data)
+      if(!item){
+              setInput({...Input,test:data[0]._id})
+
+      }
+      else{
+              setInput({...Input,test:item?.test})
+
+      }
       // console.log(response);
-      console.log(data);
+      // console.log(data);
       
   }).catch(err=>{
     console.log(err);
@@ -137,7 +160,7 @@ const HandleSelectOption=async()=>{
           <div className="Input-Row-Modal">
             <div className="input-Box">
               <div className="Input-Label">Selected test</div>
-              <select className="Input-field" name="test" onChange={(e)=>{HandleInput(e)}}>
+              <select className="Input-field" name="test" onChange={(e)=>{HandleInput(e)}} value={Input.test}>
                 {
                   ListofTest?.map((item,index)=>{
                     return(

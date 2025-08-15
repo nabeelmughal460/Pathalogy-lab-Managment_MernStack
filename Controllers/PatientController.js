@@ -36,7 +36,7 @@ exports.GetpatientByID =async (req,res)=>{
       });
         }
         else{
-            res.status(404).status({
+            res.status(404).json({
                 message:"No Such Patient Exist"
             })
         }
